@@ -6,6 +6,7 @@
         {
             Console.WriteLine("Hello, World!");
 
+            Console.WriteLine("Enter the First Number");
             int number1 = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Enter the Second Number");
             int number2 = Int32.Parse(Console.ReadLine());
