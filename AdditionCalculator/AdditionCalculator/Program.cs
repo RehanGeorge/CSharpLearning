@@ -13,6 +13,9 @@
 
             int number3 = number1 + number2;
             Console.WriteLine("The sum is: " + number3);
+
+            //Alternate way of writing it
+            Console.WriteLine($"The sum is {number3}");
         }
     }
 }
