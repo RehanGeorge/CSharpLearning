@@ -94,7 +94,29 @@
                 Console.WriteLine($"Your final score is {score} / {questions.Length}");
             }
 
-            QuizApp();
+            static void NumberCheck()
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(1, 11);
+
+                Console.WriteLine("What is the number?");
+                string userInput = Console.ReadLine();
+                int userNumber;
+
+                bool validNumber = int.TryParse(userInput, out userNumber);
+
+                if (validNumber && userNumber == randomNumber)
+                {
+                    Console.WriteLine("Congratulations, you win!");
+                }
+                else
+                {
+                    Console.WriteLine("Wrong number, try again. The correct number was: " + randomNumber);
+                }
+
+            }
+            
+            NumberCheck();
         }
     }
 }
