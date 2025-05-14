@@ -42,7 +42,33 @@
                 Console.WriteLine(s1);
             }
 
-            Escaping();
+            static void IfFunction()
+            {
+                int month = 5;
+                if (month == 5)
+                    Console.WriteLine("Month is May");
+            }
+
+            static void SwitchFunction()
+            {
+                int month = 2;
+                string monthName = "blank";
+
+                switch (month)
+                {
+                    case 1:
+                        monthName = "January";
+                        break;
+                    case 2:
+                        monthName = "February";
+                        break;
+                    default:
+                        break;
+                }
+                Console.WriteLine($"The month name is {monthName}");
+            }
+
+            SwitchFunction();
         }
     }
 }
