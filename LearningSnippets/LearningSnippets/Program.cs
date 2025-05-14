@@ -38,8 +38,11 @@
 
             static void Escaping()
             {
-
+                string s1 = "this is a \"string\" with \na backslash \\ and a colon:";
+                Console.WriteLine(s1);
             }
+
+            Escaping();
         }
     }
 }
