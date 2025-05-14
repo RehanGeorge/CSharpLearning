@@ -70,29 +70,28 @@
 
             static void QuizApp()
             {
-                string question1 = "What is the capital of Germany?";
-                string answer1 = "Berlin";
-
-                string question2 = "What is 2+2?";
-                string answer2 = "4";
-
-                string question3 = "What color do you get by mixing blue and yellow?";
-                string answer3 = "Green";
+                string[] questions = {"What is the capital of Germany?", "What is 2+2?", "What color do you get by mixing blue and yellow?"};
+                string[] answers = { "Berlin", "4", "Green" };
 
                 int score = 0;
                 
-                Console.WriteLine(question1);
-                string userAnswer1 = Console.ReadLine();
+                for (int i = 0; i < questions.Length; i++)
+                {
+                    Console.WriteLine(questions[i]);
+                    string userAnswer = Console.ReadLine();
 
-                if (userAnswer1 == answer1)
-                {
-                    Console.WriteLine("Correct!");
-                    score = score + 1;
+                    if (userAnswer.Trim().ToLower() == answers[i].ToLower())
+                    {
+                        Console.WriteLine("Correct!");
+                        score = score + 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong, the correct answer is: " + answers[i]);
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong, the correct answer is: " + answer1);
-                }
+
+                Console.WriteLine($"Your final score is {score} / {questions.Length}");
             }
 
             QuizApp();
