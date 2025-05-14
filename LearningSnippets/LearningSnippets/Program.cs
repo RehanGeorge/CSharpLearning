@@ -1,0 +1,45 @@
+﻿namespace LearningSnippets
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            static void ConvertFunction()
+            {
+                // explicit conversion
+                int myInt = 132;
+
+                long myLong = (long)myInt;
+                Console.WriteLine(myLong);
+
+                double myDouble = 32.34;
+                Console.WriteLine(myDouble);
+
+                int myInt2 = (int)myDouble;
+                Console.WriteLine(myInt2);
+
+                string numberString = "123";
+                int result = int.Parse(numberString);
+
+                string myBoolString = "true";
+                bool myBool = Convert.ToBoolean(myBoolString);
+                Console.WriteLine(myBool);
+
+                // implicitly typed variable
+                var myFavoriteGenre = "Non-Fiction";
+
+                var number1 = 14;
+                var number2 = 23;
+
+                int number3 = number1 + number2;
+
+                Console.WriteLine("The sum is {0}, and the first number is {1} with the second number {2}", number3, number1, number2);
+            }
+
+            static void Escaping()
+            {
+
+            }
+        }
+    }
+}
