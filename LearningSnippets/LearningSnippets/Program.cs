@@ -136,8 +136,28 @@
 
             static void GuessTheNumber()
             {
+                Random random = new Random();
+                int randomNumber = random.Next(1, 11);
 
+                Console.WriteLine("Guess the number I am thinking of between 1 and 10:");
+
+                string userChoice = Console.ReadLine();
+                bool validNumber = int.TryParse(userChoice, out int numberChoice);
+
+                while (validNumber)
+                {
+                    if (validNumber && numberChoice == randomNumber)
+                    {
+                        Console.WriteLine("You win");
+                        break;
+                    }
+                    Console.WriteLine("Guess again");
+                    userChoice = Console.ReadLine();
+                    validNumber = int.TryParse(userChoice, out numberChoice);
+                }
             }
+
+            GuessTheNumber();
         }
     }
 }
