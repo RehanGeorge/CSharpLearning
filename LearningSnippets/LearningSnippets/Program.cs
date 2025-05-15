@@ -189,6 +189,22 @@ namespace LearningSnippets
                 }
             }
 
+            static void multiDimensions()
+            {
+                int[,] array2D = new int[3, 3];
+                // [0] [0] [0]
+                // [0] [0] [0]
+                // [0] [0] [0]
+
+                int[,,] array3D = new int[3, 3, 3];
+
+                int[,] array2Dtest = { { 1, 2 }, { 3, 4 } };
+                Console.WriteLine(array2Dtest[0,0]);
+                array2Dtest[1, 0] = 5;
+                Console.WriteLine(array2Dtest[1,0]);
+            }
+
+            multiDimensions();
         }
     }
 }
