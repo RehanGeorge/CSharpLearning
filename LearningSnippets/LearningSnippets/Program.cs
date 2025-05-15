@@ -1,4 +1,6 @@
-﻿namespace LearningSnippets
+﻿using System.ComponentModel;
+
+namespace LearningSnippets
 {
     internal class Program
     {
@@ -170,8 +172,23 @@
 
             static void arrayList()
             {
+                // declare an array
+                int[] myIntArray = new int[5];
 
+                myIntArray[0] = 0;
+                myIntArray[1] = 1;
+                myIntArray[2] = 2;
+                myIntArray[3] = 3;
+                myIntArray[4] = 4;
+
+                int[] ints = [5, 12, 13, 16, 20];
+
+                foreach (int item in ints)
+                {
+                    Console.WriteLine(item);
+                }
             }
+
         }
     }
 }
