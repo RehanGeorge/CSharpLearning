@@ -157,7 +157,21 @@
                 }
             }
 
-            GuessTheNumber();
+            static void DoWhileLoop()
+            {
+                int counter = 0;
+                do
+                {
+                    Console.WriteLine(counter);
+                    counter++;
+                }
+                while (counter < 10000);
+            }
+
+            static void arrayList()
+            {
+
+            }
         }
     }
 }
