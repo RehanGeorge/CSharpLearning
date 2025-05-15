@@ -116,7 +116,28 @@
 
             }
             
-            NumberCheck();
+            static void Loops()
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(new string('\n', i));
+                    Console.WriteLine("rocket");
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                }
+
+                int counter = 0;
+                while (counter < 10)
+                {
+                    Console.WriteLine(counter);
+                    counter++;
+                }
+            }
+
+            static void GuessTheNumber()
+            {
+
+            }
         }
     }
 }
