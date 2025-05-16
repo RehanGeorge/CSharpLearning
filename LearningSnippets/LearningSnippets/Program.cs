@@ -204,7 +204,28 @@ namespace LearningSnippets
                 Console.WriteLine(array2Dtest[1,0]);
             }
 
-            multiDimensions();
+            Console.WriteLine("Enter your input");
+            string userInput = Console.ReadLine();
+            Methods.WriteSomething(userInput);
+        }
+    }
+
+    internal class Methods
+    { 
+        void MyFirstMethod()
+        {
+            Console.WriteLine("MyFirstMethod was called.");
+        }
+
+        public static void WriteSomething(string x)
+        {
+            Console.WriteLine($"You wanted to write: {x}");
+        }
+
+        public int Add(int x, int y)
+        {
+            return x + y;
         }
     }
 }
+
