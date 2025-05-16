@@ -4,6 +4,7 @@ namespace LearningSnippets
 {
     internal class Program
     {
+        static string myName = "Rehan";
         static void Main(string[] args)
         {
             static void ConvertFunction()
@@ -204,9 +205,10 @@ namespace LearningSnippets
                 Console.WriteLine(array2Dtest[1,0]);
             }
 
-            Console.WriteLine("Enter your input");
-            string userInput = Console.ReadLine();
-            Methods.WriteSomething(userInput);
+            Console.WriteLine(Methods.Add(25,46));
+
+            Console.WriteLine(myName);
+
         }
     }
 
@@ -222,7 +224,13 @@ namespace LearningSnippets
             Console.WriteLine($"You wanted to write: {x}");
         }
 
-        public int Add(int x, int y)
+        /// <summary>
+        /// This takes two integers and returns their sum
+        /// </summary>
+        /// <param name="x">The first integer to add.</param>
+        /// <param name="y">The second integer to add.</param>
+        /// <returns>The sum of <paramref name="x"/> and <paramref name="y"/>.</returns>
+        public static int Add(int x, int y)
         {
             return x + y;
         }
