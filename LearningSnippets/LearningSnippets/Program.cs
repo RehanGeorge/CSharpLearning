@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Transactions;
 
 namespace LearningSnippets
 {
@@ -73,11 +74,11 @@ namespace LearningSnippets
 
             static void QuizApp()
             {
-                string[] questions = {"What is the capital of Germany?", "What is 2+2?", "What color do you get by mixing blue and yellow?"};
+                string[] questions = { "What is the capital of Germany?", "What is 2+2?", "What color do you get by mixing blue and yellow?" };
                 string[] answers = { "Berlin", "4", "Green" };
 
                 int score = 0;
-                
+
                 for (int i = 0; i < questions.Length; i++)
                 {
                     Console.WriteLine(questions[i]);
@@ -118,7 +119,7 @@ namespace LearningSnippets
                 }
 
             }
-            
+
             static void Loops()
             {
                 for (int i = 0; i < 10; i++)
@@ -200,15 +201,39 @@ namespace LearningSnippets
                 int[,,] array3D = new int[3, 3, 3];
 
                 int[,] array2Dtest = { { 1, 2 }, { 3, 4 } };
-                Console.WriteLine(array2Dtest[0,0]);
+                Console.WriteLine(array2Dtest[0, 0]);
                 array2Dtest[1, 0] = 5;
-                Console.WriteLine(array2Dtest[1,0]);
+                Console.WriteLine(array2Dtest[1, 0]);
             }
 
-            Console.WriteLine(Methods.Add(25,46));
+            static void WeatherCalculateMethod()
+            {
+                Console.WriteLine("Enter the number of days to simulate: ");
+                int days = int.Parse(Console.ReadLine());
 
-            Console.WriteLine(myName);
+                int[] temperature = new int[days];
+                string[] conditions = { "Sunny", "Rainy", "Cloudy", "Snowy" };
+                string[] weatherConditions = new string[days];
 
+                Random random = new Random();
+
+                for (int i = 0; i < days; i++)
+                {
+                    temperature[i] = random.Next(-10, 40);
+                    weatherConditions[i] = conditions[random.Next(conditions.Length)];
+                }
+
+                int maxTemp = temperature.Max();
+                int minTemp = temperature.Min();
+
+                double averageTemp = WeatherCalculatorMethods.CalculateAverageTemp(temperature);
+                string mostCommonCondition = WeatherCalculatorMethods.MostCommonCondition(conditions, weatherConditions);
+
+                Console.WriteLine($"The average temperature is {averageTemp} with a max of {maxTemp} and a min of {minTemp}");
+                Console.WriteLine($"The most common conditions is {mostCommonCondition}");
+            }
+
+            WeatherCalculateMethod();
         }
     }
 
@@ -233,6 +258,50 @@ namespace LearningSnippets
         public static int Add(int x, int y)
         {
             return x + y;
+        }
+    }
+
+    internal class WeatherCalculatorMethods
+    {
+        /// <summary>
+        /// Calculates the average temperature basis an input array of temperatures
+        /// </summary>
+        /// <param name="temperature">The array of temperatures</param>
+        /// <returns>The average of the input array</returns>
+        public static double CalculateAverageTemp(int[] temperature)
+        {
+            double average = 0;
+            foreach (int temp in temperature)
+            {
+                average += temp;
+            }
+            average = average / temperature.Length;
+            return average;
+        }
+
+        public static string MostCommonCondition(string[] conditions, string[] weatherConditions)
+        {
+            int count = 0;
+            string mostCommon = conditions[0];
+
+            for (int i = 0; i < conditions.Length; i++)
+            {
+                int tempCount = 0;
+                for (int j = 0; j < weatherConditions.Length; j++)
+                {
+                    if (weatherConditions[j] == conditions[i])
+                    {
+                        tempCount++;
+                    }
+                }
+                if (tempCount > count)
+                {
+                    count = tempCount;
+                    mostCommon = conditions[i];
+                }
+            }
+
+            return mostCommon;
         }
     }
 }
