@@ -33,5 +33,12 @@ namespace ClassesApp
         {
             Name = name;
         }
+
+        public void SetDetails(string name, string address = "NA", string contactNumber = "NA")
+        {
+            Name = name;
+            Address = address;
+            ContactNumber = contactNumber;
+        }
     }
 }

@@ -32,6 +32,16 @@ namespace ClassesApp
 
             Car myBMW = new Car("i7", "BMW", true);
             myBMW.Drive();
+
+            // Default Customer with no Arguments given
+            Customer myCustomer = new Customer();
+            myCustomer.SetDetails("Frank", "Mainstreet 2", "555121312");
+
+            Console.WriteLine("MyCustomer is: " + myCustomer.Name + " and he lives in " + myCustomer.Address);
+
+            Customer secondCustomer = new Customer();
+            secondCustomer.SetDetails("Rehan");
+            Console.WriteLine($"secondCustomer has the following details: name - {secondCustomer.Name}, address: {secondCustomer.Address} and Contact Number: {secondCustomer.ContactNumber}");
         }
     }
 }
