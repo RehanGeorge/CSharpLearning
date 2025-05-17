@@ -268,7 +268,7 @@ namespace LearningSnippets
         /// </summary>
         /// <param name="temperature">The array of temperatures</param>
         /// <returns>The average of the input array</returns>
-        public static double CalculateAverageTemp(int[] temperature)
+        internal static double CalculateAverageTemp(int[] temperature)
         {
             double average = 0;
             foreach (int temp in temperature)
@@ -279,7 +279,7 @@ namespace LearningSnippets
             return average;
         }
 
-        public static string MostCommonCondition(string[] conditions, string[] weatherConditions)
+        internal static string MostCommonCondition(string[] conditions, string[] weatherConditions)
         {
             int count = 0;
             string mostCommon = conditions[0];
