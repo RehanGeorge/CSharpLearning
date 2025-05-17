@@ -23,6 +23,11 @@ namespace ClassesApp
             IsLuxury = isLuxury;
         }
 
+        public void Drive()
+        {
+            Console.WriteLine($"I'm a {Model} is driving");
+        }
+
         public string Model { get => _model; set => _model = value; }
         public string Brand { 
             get
