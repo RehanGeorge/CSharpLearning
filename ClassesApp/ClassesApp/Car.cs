@@ -8,9 +8,20 @@ namespace ClassesApp
 {
     internal class Car
     {
-        public Car()
+        // member variable
+        // private hides the variable from other classes
+        private string _model = "";
+        private string _brand = "";
+
+        // Constructor
+        public Car(string model, string brand)
         {
-            Console.WriteLine("An object of car has been created.");
+            Model = model;
+            Brand = brand;
+            Console.WriteLine($"A {Brand} of the model {Model} has been created.");
         }
+
+        public string Model { get => _model; set => _model = value; }
+        public string Brand { get => _brand; set => _brand = value; }
     }
 }
