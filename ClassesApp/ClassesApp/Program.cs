@@ -42,6 +42,11 @@ namespace ClassesApp
             Customer secondCustomer = new Customer();
             secondCustomer.SetDetails("Rehan");
             Console.WriteLine($"secondCustomer has the following details: name - {secondCustomer.Name}, address: {secondCustomer.Address} and Contact Number: {secondCustomer.ContactNumber}");
+
+            Rectangle r1 = new Rectangle();
+            r1.Width = 5;
+            r1.Height = 5;
+            Console.WriteLine($"The area of r1 is {r1.Area}");
         }
     }
 }
