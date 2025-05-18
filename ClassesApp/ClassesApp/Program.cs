@@ -26,6 +26,7 @@ namespace ClassesApp
             Console.WriteLine(myCustomer.Name);
             */
 
+            Customer.SayHi();
             Car myAudi = new Car("A3", "Audi", false);
 
             myAudi.Drive();
@@ -47,6 +48,9 @@ namespace ClassesApp
             r1.Width = 5;
             r1.Height = 5;
             Console.WriteLine($"The area of r1 is {r1.Area}");
+
+            // Accessing the public static variable number of cars produced.
+            Console.WriteLine($"Number of cars produced: {Car.NumberOfCars}");
         }
     }
 }

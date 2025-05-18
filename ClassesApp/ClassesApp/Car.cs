@@ -8,6 +8,8 @@ namespace ClassesApp
 {
     internal class Car
     {
+        public static int NumberOfCars = 0;
+
         // member variable
         // private hides the variable from other classes
         private string _model = "";
@@ -17,10 +19,17 @@ namespace ClassesApp
         // Custom Constructor
         public Car(string model, string brand, bool isLuxury)
         {
+            NumberOfCars++;
+
             Model = model;
             Brand = brand;
             Console.WriteLine($"A {Brand} of the model {Model} has been created.");
             IsLuxury = isLuxury;
+        }
+
+        public Car()
+        {
+            NumberOfCars++;
         }
 
         public void Drive()

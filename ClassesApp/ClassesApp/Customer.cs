@@ -40,5 +40,10 @@ namespace ClassesApp
             Address = address;
             ContactNumber = contactNumber;
         }
+
+        public static void SayHi()
+        {
+            Console.WriteLine("Hi from the customer class");
+        }
     }
 }
