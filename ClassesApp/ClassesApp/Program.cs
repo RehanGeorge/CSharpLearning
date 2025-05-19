@@ -48,10 +48,14 @@ namespace ClassesApp
 
             Console.WriteLine($"secondCustomer has the following details: name - {secondCustomer.Name}, address: {secondCustomer.Address} and Contact Number: {secondCustomer.ContactNumber}");
             
-            Rectangle r1 = new Rectangle();
+            Rectangle r1 = new Rectangle("Red");
             r1.Width = 5;
             r1.Height = 5;
             Console.WriteLine($"The area of r1 is {r1.Area}");
+
+            Rectangle r2 = new Rectangle("Blue");
+            r1.DisplayDetails();
+            r2.DisplayDetails();
 
             // Accessing the public static variable number of cars produced.
             Console.WriteLine($"Number of cars produced: {Car.NumberOfCars}");
