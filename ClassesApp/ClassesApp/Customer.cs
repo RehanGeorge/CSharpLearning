@@ -9,6 +9,25 @@ namespace ClassesApp
 {
     internal class Customer
     {
+        private static int nextId = 0;
+
+        private readonly int _id;
+
+        private string _password;
+
+        public string Password { set
+            {
+                _password = value;
+            } }
+
+        // Read Only Property
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+        }
         public string Name { get; set; }
         public string Address { get; set; }
         public string ContactNumber { get; set; }
@@ -16,6 +35,7 @@ namespace ClassesApp
         // Default Customer
         public Customer()
         {
+            _id = nextId++;
             Name = "DefaultName";
             Address = "No Address";
             ContactNumber = "No Contact Number";
@@ -24,6 +44,7 @@ namespace ClassesApp
         // Custom Constructor
         public Customer(string name, string address, string contactNumber)
         {
+            _id = nextId++;
             Name = name;
             Address = address;
             ContactNumber = contactNumber;
@@ -31,6 +52,7 @@ namespace ClassesApp
 
         public Customer(string name)
         {
+            _id = nextId++;
             Name = name;
         }
 
@@ -39,6 +61,11 @@ namespace ClassesApp
             Name = name;
             Address = address;
             ContactNumber = contactNumber;
+        }
+
+        public void GetDetails()
+        {
+            Console.WriteLine($"Details about the customer {Name}. Id is {Id}");
         }
 
         public static void SayHi()
