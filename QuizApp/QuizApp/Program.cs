@@ -10,16 +10,17 @@
                 new string[]
                 {
                     "Paris", "Berlin", "London", "Madrid"
-                }, 1)
+                }, 1),
+                new Question("What is 2+2?",
+                new string[] {"3", "4", "5", "6",},
+                1),
+                new Question("How many keys does a classic piano have",
+                new string[] {"32", "56", "88", "106"},
+                2)
             };
 
             Quiz myQuiz = new Quiz(questions);
-            myQuiz.DisplayQuestion(questions[0]);
-            myQuiz.DisplayAnswers(questions[0]);
-
-            int userChoice = int.Parse(Console.ReadLine()) - 1;
-            bool correct = questions[0].IsCorrectAnswer(userChoice);
-            Console.WriteLine(correct);
+            myQuiz.StartQuiz();
         }
     }
 }
