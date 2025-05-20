@@ -16,6 +16,9 @@
                 1),
                 new Question("How many keys does a classic piano have",
                 new string[] {"32", "56", "88", "106"},
+                2),
+                new Question("Who wrote Hamlet?", 
+                new string[] {"Goethe", "Austen", "Shakespeare", "Dickens" },
                 2)
             };
 
