@@ -1,12 +1,23 @@
-﻿using System.Drawing;
-using System.Security.Cryptography;
-
-namespace ListsApp
+﻿namespace ListsApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
+
+            employees.Add(1, new Employee("John Doe", 35, 100000));
+            employees.Add(2, new Employee("John Does", 55, 200000));
+            employees.Add(3, new Employee("John Doesnt", 45, 80000));
+            employees.Add(4, new Employee("John Wasnt", 15, 100000));
+            employees.Add(5, new Employee("John Was", 25, 100000));
+
+            foreach (var item in employees)
+            {
+                Console.WriteLine($"ID is {item.Key} with Name: {item.Value.Name}, age: {item.Value.Age} and salary: {item.Value.Salary}");
+            }
+
+            /* Initiate dictionaries
             Dictionary<int, string> employees = new Dictionary<int, string>();
 
             employees.Add(101, "John Doe");
@@ -43,6 +54,8 @@ namespace ListsApp
             {
                 Console.WriteLine($"ID: {employee.Key}, Name: {employee.Value}");
             }
+
+            */
 
             /* Nullables
             int? age = null; // int? is a nullable int
