@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Security.Cryptography;
 
 namespace ListsApp
 {
@@ -6,6 +7,59 @@ namespace ListsApp
     {
         static void Main(string[] args)
         {
+            Dictionary<int, string> employees = new Dictionary<int, string>();
+
+            employees.Add(101, "John Doe");
+            employees.Add(102, "Bob Smith");
+            employees.Add(103, "Rob Smith");
+            employees.Add(104, "Flob Smith");
+            employees.Add(105, "Dob Smith");
+            employees.Add(106, "Cob Smith");
+
+            // Access items in a dictionary
+            string name = employees[101];
+            Console.WriteLine(name);
+
+            // Update data in a dictionary
+            employees[102] = "Jane Smith";
+
+            // Remove an item from a dictionary
+            employees.Remove(100);
+
+            employees[104] = "Mike Jike";
+
+            if(!employees.ContainsKey(104))
+            {
+                employees.Add(104, "Mike Jike");
+            }
+
+            bool added = employees.TryAdd(102, "Michal Brims");
+            if (!added)
+            {
+                Console.WriteLine("An employee already exists here.");
+            }
+
+            foreach (KeyValuePair<int, string> employee in employees)
+            {
+                Console.WriteLine($"ID: {employee.Key}, Name: {employee.Value}");
+            }
+
+            /* Nullables
+            int? age = null; // int? is a nullable int
+            int myAge = 32;
+
+            if (age.HasValue)
+            {
+                Console.WriteLine("Age is " + age.Value);
+                int sum = age.Value + myAge;
+            }
+            else
+            {
+                Console.WriteLine("Age is not specified.");
+            }
+            */
+
+            /* Products
             List<Product> products = new List<Product> {
                 new Product { Name = "Apple", Price = 0.80 },
                 new Product { Name = "Banana", Price = 0.30 },
@@ -22,7 +76,7 @@ namespace ListsApp
             {
                 Console.WriteLine($"Product name: {product.Name} for price {product.Price}");
             }
-
+            */
 
             /* Lists
             // Declaring a list and initializing
