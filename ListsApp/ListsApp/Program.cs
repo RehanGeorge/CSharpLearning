@@ -7,12 +7,8 @@ namespace ListsApp
         static void Main(string[] args)
         {
             // Declaring a list and initializing
-            List<string> colors = new List<string>();
+            List<string> colors = ["red", "blue", "green", "red"];
 
-            colors.Add("red");
-            colors.Add("blue");
-            colors.Add("green");
-            colors.Add("red");
             printColors(colors);
 
             while (colors.Remove("red") == true)
