@@ -12,7 +12,19 @@ namespace ListsApp
             colors.Add("red");
             colors.Add("blue");
             colors.Add("green");
+            colors.Add("red");
+            printColors(colors);
 
+            while (colors.Remove("red") == true)
+            {
+                Console.WriteLine("Deleted 1 red");
+            }
+
+            printColors(colors);
+        }
+
+        private static void printColors(List<string> colors)
+        {
             Console.WriteLine("Current colors in the colors list!");
             foreach (string color in colors)
             {
