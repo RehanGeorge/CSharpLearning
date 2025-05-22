@@ -4,6 +4,13 @@
     {
         static void Main(string[] args)
         {
+            var codes = new Dictionary<string, string>
+            {
+                ["NY"] = "New York",
+                ["CA"] = "California",
+                ["TX"] = "Texas"
+            };
+
             Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
 
             employees.Add(1, new Employee("John Doe", 35, 100000));
