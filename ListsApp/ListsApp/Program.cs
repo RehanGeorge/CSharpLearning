@@ -11,6 +11,16 @@
                 ["TX"] = "Texas"
             };
 
+            if (codes.TryGetValue("N1Y", out string state))
+            {
+                Console.WriteLine(state);
+            }
+
+            foreach (var item in codes)
+            {
+                Console.WriteLine($"The statecode is {item.Key} and the state name is {item.Value}");
+            }
+
             Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
 
             employees.Add(1, new Employee("John Doe", 35, 100000));
