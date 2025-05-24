@@ -19,7 +19,13 @@ namespace ClassesAdditional
                 int num1 = int.Parse(Console.ReadLine());
                 int num2 = 3;
 
-                result = num1 / num2;
+                result = num2 / num1;
+            } catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("DON'T DIVIDE BY ZERO!!! " + ex.Message);
+            } catch(FormatException ex)
+            {
+                Console.WriteLine("You didn't enter a number " + ex.Message);
             }
             catch (Exception ex)
             {
