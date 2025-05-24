@@ -26,6 +26,9 @@ namespace ClassesAdditional
             } catch(FormatException ex)
             {
                 Console.WriteLine("You didn't enter a number " + ex.Message);
+            } catch (OverflowException ex)
+            {
+                Console.WriteLine("Number too high!");
             }
             catch (Exception ex)
             {
