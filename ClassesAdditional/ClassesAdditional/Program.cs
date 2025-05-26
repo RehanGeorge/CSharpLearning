@@ -55,5 +55,15 @@ namespace ClassesAdditional
             }
             return age;
         }
+        
+        static void LevelOne()
+        {
+            LevelTwo();
+        }
+
+        static void LevelTwo()
+        {
+            throw new Exception("Something went wrong!");
+        }
     }
 }
