@@ -6,6 +6,17 @@ namespace ClassesAdditional
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("App running before the try catch");
+            try
+            {
+                LevelOne();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine("App still running");
+            /*
             int result = 0;
 
             Debug.WriteLine("Main method is running");
@@ -40,6 +51,7 @@ namespace ClassesAdditional
             {
                 Console.WriteLine($"Result: {result}");
             }
+            */
         }
 
         static int GetUserAge(string input)
