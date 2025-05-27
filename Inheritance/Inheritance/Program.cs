@@ -5,6 +5,10 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
+
+            Dog fido = new Dog();
+            fido.Bark();
+            fido.Eat();
         }
     }
 
@@ -21,6 +25,22 @@
         public void Bark()
         {
             Console.WriteLine("Barking...");
+        }
+    }
+
+    class Collie : Dog
+    {
+        public void GoingNuts()
+        {
+            Console.WriteLine("Collie going nuts");
+        }
+    }
+
+    class Cat: Animal
+    {
+        public void Meow()
+        {
+            Console.WriteLine("Cat is meowing...");
         }
     }
 }
