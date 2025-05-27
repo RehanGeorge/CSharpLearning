@@ -7,8 +7,16 @@
             Console.WriteLine("Hello, World!");
 
             Dog fido = new Dog();
-            fido.Bark();
+            fido.MakeSound();
             fido.Eat();
+
+            BaseClass baseClass = new BaseClass();
+            baseClass.ShowFields();
+
+            DerivedClass derivedClass = new DerivedClass();
+            derivedClass.AccessFields();
+            baseClass.ShowFields();
+            derivedClass.ShowFields();
         }
     }
 
@@ -18,12 +26,19 @@
         {
             Console.WriteLine("Eating...");
         }
+
+        public virtual void MakeSound()
+        {
+            Console.WriteLine("Animal makes a sound");
+        }
     }
 
     class Dog: Animal
     {
-        public void Bark()
+
+        public override void MakeSound()
         {
+            base.MakeSound();
             Console.WriteLine("Barking...");
         }
     }
