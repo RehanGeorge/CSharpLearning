@@ -17,6 +17,9 @@
             derivedClass.AccessFields();
             baseClass.ShowFields();
             derivedClass.ShowFields();
+
+            Employee joe = new Employee("Joe", 26);
+            joe.DisplayPersonInfo();
         }
     }
 
