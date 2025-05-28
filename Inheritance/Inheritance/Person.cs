@@ -21,6 +21,16 @@ namespace Inheritance
         {
             Console.WriteLine($"Name: {Name}, Age: {Age}");
         }
+
+        /// <summary>
+        /// Increases the age of the person by the specified number of years.
+        /// </summary>
+        /// <param name="years">The number of years the object should age</param>
+        /// <returns>Returns the new age after aging</returns>
+        public int BecomeOlder(int years)
+        {
+            return Age + years;
+        }
     }
 
     public class Employee : Person
@@ -32,6 +42,28 @@ namespace Inheritance
             JobTitle = jobTitle;
             EmployeeID = employeeID;
             Console.WriteLine("Employee constructor called");
+        }
+
+        public void DisplayEmployeeInfo()
+        {
+            DisplayPersonInfo();
+            Console.WriteLine($"Job Title: {JobTitle}, Employee ID: {EmployeeID}");
+        }
+    }
+
+    public class Manager : Employee
+    {
+        public int TeamSize { get; private set; }
+
+        public Manager(string name, int age, string jobTitle, int employeeID, int teamSize) : base(name, age, jobTitle, employeeID)
+        {
+            TeamSize = teamSize;
+        }
+
+        public void DisplayManagerInfo()
+        {
+            DisplayEmployeeInfo();
+            Console.WriteLine($"Team Size: {TeamSize}");
         }
     }
 }

@@ -18,8 +18,13 @@
             baseClass.ShowFields();
             derivedClass.ShowFields();
 
-            Employee joe = new Employee("Joe", 26);
+            Employee joe = new Employee("Joe", 26, "Sales Rep", 12345);
             joe.DisplayPersonInfo();
+
+            Manager carl = new Manager("Carl", 45, "Manager", 123123, 7);
+            carl.DisplayManagerInfo();
+            Console.WriteLine(carl.BecomeOlder(5));
+
         }
     }
 
