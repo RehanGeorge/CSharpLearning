@@ -59,6 +59,10 @@
             app = new Application(dbLogger);
             app.DoWork();
 
+            MultiFunctionPrinter multiFunctionPrinter = new MultiFunctionPrinter();
+            multiFunctionPrinter.Print();
+            multiFunctionPrinter.Scan();
+
             /*
             Dog dog = new Dog();
             dog.MakeSound();
