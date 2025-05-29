@@ -79,6 +79,14 @@
             Cat cat = new Cat();
             cat.MakeSound();
             cat.Eat("fish");
+
+            IPaymentProcessor creditCardProcessor = new CreditCardProcessor();
+            PaymentService paymentService = new PaymentService(creditCardProcessor);
+            paymentService.ProcessOrderPayment(100.00m);
+
+            IPaymentProcessor paypalProcessor = new PaypalProcessor();
+            paymentService = new PaymentService(paypalProcessor);
+            paymentService.ProcessOrderPayment(50.00m);
         }
     }
 }
