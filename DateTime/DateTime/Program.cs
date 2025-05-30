@@ -4,6 +4,15 @@
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Ceiling: " + Math.Ceiling(15.3));
+            Console.WriteLine("Floor: " + Math.Floor(15.3));
+
+            int num1 = 13;
+            int num2 = 9;
+            Console.WriteLine("Max: " + Math.Max(num1, num2));
+            Console.WriteLine("Min: " + Math.Min(num1, num2));
+            
+
             DateTime dateTime = new DateTime(2025, 8, 5);
 
             Console.WriteLine("My birthday is {0}", dateTime);
@@ -37,6 +46,7 @@
             DateTime fullClock = DateTime.Now;
             Console.WriteLine($"The time is {now.Hour} o'clock and {now.Minute} minutes and {now.Second} seconds");
 
+            /*
             Console.WriteLine("Write a date in this format: yyyy-mm-dd");
             string input = Console.ReadLine();
             if (DateTime.TryParse(input, out dateTime))
@@ -47,6 +57,7 @@
             }
 
             Console.WriteLine($"Days since my birthday - {CalculateDaysSinceBirthday(Console.ReadLine())}");
+            */
         }
 
         static DateTime GetTomorrow()
