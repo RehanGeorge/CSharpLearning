@@ -58,6 +58,8 @@
 
             Console.WriteLine($"Days since my birthday - {CalculateDaysSinceBirthday(Console.ReadLine())}");
             */
+
+            Console.WriteLine(CalculateDaysSinceBirthday(new DateTime(1992, 08, 05)));
         }
 
         static DateTime GetTomorrow()
@@ -75,6 +77,13 @@
             DateTime.TryParse(input, out DateTime birthday);
             DateTime today = DateTime.Today;
             TimeSpan daysPassed = today - birthday;
+            return daysPassed.Days;
+        }
+
+        static int CalculateDaysSinceBirthday(DateTime dateTime)
+        {
+            DateTime today = DateTime.Today;
+            TimeSpan daysPassed = today - dateTime;
             return daysPassed.Days;
         }
     }
