@@ -35,11 +35,25 @@
 
             logHandler = logger.LogToFile;
             logHandler("Logging to file.");
+
+            int[] intArray = { 1, 2, 3, 4, 5 };
+            string[] stringArray = { "One", "Two", "Three" };
+            PrintItemArray(intArray);
+            PrintItemArray(stringArray);
         }
 
         static void ShowMessage(string message)
         {
             Console.WriteLine(message);
+        }
+
+        // Generic method to print items of any type
+        public static void PrintItemArray<T>(T[] items)
+        {
+            foreach (T item in items)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
