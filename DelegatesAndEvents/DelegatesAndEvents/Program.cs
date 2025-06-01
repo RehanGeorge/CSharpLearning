@@ -1,20 +1,6 @@
 ﻿namespace DelegatesAndEvents
 {
-    public delegate void LogHandler(string message);
-
-    public class Logger
-    {
-        public void LogToConsole(string message)
-        {
-            Console.WriteLine("Console Log: " + message);
-        }
-
-        public void LogToFile(string message)
-        {
-            Console.WriteLine("File log: " + message);
-        }
-    }
-
+ 
     // 1. Declaration
     public delegate void Notify(string message);
     internal class Program
@@ -40,8 +26,15 @@
             string[] stringArray = { "One", "Two", "Three" };
             PrintItemArray(intArray);
             PrintItemArray(stringArray);
+
+            Person[] people = {
+                new Person { Name = "Alice", Age = 30 },
+                new Person { Name = "Bob", Age = 25 },
+                new Person { Name = "Charlie", Age = 35 }
+            };
         }
 
+        // Method that matches the delegate signature
         static void ShowMessage(string message)
         {
             Console.WriteLine(message);
