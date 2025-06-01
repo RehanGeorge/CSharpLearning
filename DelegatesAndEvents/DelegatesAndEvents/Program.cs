@@ -30,8 +30,24 @@
             Person[] people = {
                 new Person { Name = "Alice", Age = 30 },
                 new Person { Name = "Bob", Age = 25 },
+                new Person { Name = "Denis", Age = 36 },
                 new Person { Name = "Charlie", Age = 35 }
             };
+
+            PersonSorter.Sort(people, CompareByAge);
+
+            foreach (Person person in people)
+            {
+                Console.WriteLine($"{person.Name}, Age: {person.Age}");
+            }
+
+            PersonSorter.Sort(people, CompareByName);
+
+            Console.WriteLine("Sorted by Name:");
+            foreach (Person person in people)
+            {
+                Console.WriteLine($"{person.Name}, Age: {person.Age}");
+            }
         }
 
         // Method that matches the delegate signature
@@ -47,6 +63,16 @@
             {
                 Console.WriteLine(item);
             }
+        }
+
+        public static int CompareByAge(Person x, Person y)
+        {
+            return x.Age.CompareTo(y.Age);
+        }
+
+        static int CompareByName(Person x, Person y)
+        {
+            return x.Name.CompareTo(y.Name);
         }
     }
 }

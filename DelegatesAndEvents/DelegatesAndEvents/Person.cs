@@ -33,10 +33,5 @@ namespace DelegatesAndEvents
                 }
             }
         }
-
-        public static int CompareByAge(Person x, Person y)
-        {
-            return x.Age.CompareTo(y.Age);
-        }
     }
 }
