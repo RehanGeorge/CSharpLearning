@@ -19,5 +19,13 @@ namespace DelegatesAndEvents
         {
             Console.WriteLine("File log: " + message);
         }
+        public static void InvokeSafely(LogHandler logHandler, string message)
+        {
+            LogHandler tempLogHandler = logHandler;
+            if (tempLogHandler != null)
+            {
+                tempLogHandler(message);
+            }
+        }
     }
 }

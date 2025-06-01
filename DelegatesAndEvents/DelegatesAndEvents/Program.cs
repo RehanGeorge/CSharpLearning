@@ -17,10 +17,24 @@
 
             Logger logger = new Logger();
             LogHandler logHandler = logger.LogToConsole;
-            logHandler("Logging to console.");
-
-            logHandler = logger.LogToFile;
+            logHandler += logger.LogToFile; // Multicast delegate
+            
             logHandler("Logging to file.");
+
+            foreach (LogHandler handler in logHandler.GetInvocationList())
+            {
+                try
+                {
+                    handler("This is a log message.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error invoking handler: {ex.Message}");
+                }
+            }
+
+            logHandler -= logger.LogToFile; // Remove one handler
+            Logger.InvokeSafely(logHandler, "This is a safe log message.");
 
             int[] intArray = { 1, 2, 3, 4, 5 };
             string[] stringArray = { "One", "Two", "Three" };
