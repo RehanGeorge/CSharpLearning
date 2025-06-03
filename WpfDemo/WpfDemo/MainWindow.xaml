@@ -11,6 +11,7 @@
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="10" />
@@ -20,13 +21,13 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1" Content="Hello World"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Title of App" />
         <Label Grid.Row="2" Grid.Column="2" Content="Sample Text" />
         <Button Grid.Row="3" Grid.Column="2" Content="A" />
-        <Button Grid.Row="3" Grid.Column="3" Content="B" />
+        <Button Grid.Row="3" Grid.Column="4" Content="B" />
     </Grid>
 </Window>
