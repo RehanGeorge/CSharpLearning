@@ -29,5 +29,10 @@ namespace WpfDemo
             Grid myGrid = (Grid)FindName("myGrid");
             myGrid.Children.Add(myButton);
         }
+
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello World");
+        }
     }
 }
