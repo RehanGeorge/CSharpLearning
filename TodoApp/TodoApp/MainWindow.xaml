@@ -24,5 +24,9 @@
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
+        <Button Grid.Row="5" Grid.Column="1" Content="Create Todo" />
+
+        <TextBox Grid.Row="3" Grid.Column="1" Background="#FF171717" Foreground="White"/>
+
     </Grid>
 </Window>
