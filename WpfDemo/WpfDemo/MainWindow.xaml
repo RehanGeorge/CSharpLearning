@@ -5,28 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="300" Width="500">
     <Grid x:Name="myGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="10" />
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="10"/>
-        </Grid.RowDefinitions>
-        <Label Grid.Row="1" Grid.Column="1" Content="Hello World"/>
-        <Label Grid.Row="1" Grid.Column="2" Content="Title of App" />
-        <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Content="Sample Text Sample Text Sample Text" />
-        <Button Grid.Row="3" Grid.Column="2" Content="A" Click="Button_Click2"/>
+        <ContentControl x:Name="MainContent" />
     </Grid>
 </Window>
