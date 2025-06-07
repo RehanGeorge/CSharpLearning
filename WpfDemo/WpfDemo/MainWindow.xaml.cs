@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfDemo.Data;
 
 namespace WpfDemo
 {
@@ -16,14 +17,23 @@ namespace WpfDemo
     /// </summary>
     public partial class MainWindow : Window
     {
+        Person person = new Person
+        {
+            Name = "John Doe",
+            Age = 30
+        };
+
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = person;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello World");
+            string personData = person.Name + " is " + person.Age + " years old.";
+            MessageBox.Show(personData);
         }
     }
 }
