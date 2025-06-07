@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfDemo.Data
 {
-    internal class Person
+    public class Person
     {
         public int Age { get; set; }
         public string Name { get; set; }

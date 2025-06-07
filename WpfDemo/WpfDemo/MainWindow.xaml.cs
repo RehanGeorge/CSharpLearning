@@ -17,18 +17,19 @@ namespace WpfDemo
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Person> People = new List<Person>()
+        {
+            new() { Name = "Alice", Age = 30 },
+            new() { Name = "Bob", Age = 25 },
+            new() { Name = "Charlie", Age = 35 },
+            new() { Name = "Diana", Age = 28 }
+        };
 
         public MainWindow()
         {
             InitializeComponent();
 
-            ListBoxNames.ItemsSource = new List<string>()
-            {
-                "Alice",
-                "Bob",
-                "Charlie",
-                "Diana"
-            };
+            ListBoxPeople.ItemsSource = People;
         }
 
     }
