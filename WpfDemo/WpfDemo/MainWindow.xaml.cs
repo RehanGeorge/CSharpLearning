@@ -32,5 +32,16 @@ namespace WpfDemo
             ListBoxPeople.ItemsSource = People;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = ListBoxPeople.SelectedItems;
+            foreach (var item in selectedItems)
+            {
+                if (item is Person person)
+                {
+                    MessageBox.Show($"Selected: {person.Name}, Age: {person.Age}");
+                }
+            }
+        }
     }
 }
