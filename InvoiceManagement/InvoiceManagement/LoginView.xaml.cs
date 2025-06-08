@@ -29,7 +29,7 @@ namespace InvoiceManagement
         {
             string passwordEntered = PasswordBox.Password;
 
-            string? envPw = Environment.GetEnvironmentVariable("InvoiceMaangement");
+            string? envPw = Environment.GetEnvironmentVariable("InvoiceManagement");
 
             if (envPw != null)
             {
@@ -42,8 +42,13 @@ namespace InvoiceManagement
                 }
             } else
             {
-                MessageBox.Show("Environment variable 'InvoiceMaangement' not set");
+                MessageBox.Show("Environment variable 'InvoiceManagement' not set");
             }
+        }
+
+        public void OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            LoginButton.IsEnabled = !string.IsNullOrEmpty(PasswordBox.Password);
         }
     }
 }
