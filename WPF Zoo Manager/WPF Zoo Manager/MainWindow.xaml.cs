@@ -19,6 +19,18 @@ namespace WPF_Zoo_Manager
         public MainWindow()
         {
             InitializeComponent();
+            LoadAnimals();
+        }
+
+        private void LoadAnimals()
+        {
+            using (var context = new ZooContext())
+            {
+                var animals = context.Animals.ToList();
+                Console.WriteLine("Animals loaded from database:");
+                MessageBox.Show($"Loaded {animals.Count} animals from the database.", "Zoo Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Bind 'animals' to your UI, e.g., DataGrid
+            }
         }
     }
 }
