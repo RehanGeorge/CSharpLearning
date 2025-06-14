@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace WPF_ZooManager
+namespace WPF_Zoo_Manager
 {
     /// <summary>
     /// Interaction logic for App.xaml

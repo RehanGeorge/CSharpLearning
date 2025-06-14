@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_ZooManager
+namespace WPF_Zoo_Manager
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
