@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,6 +23,7 @@ namespace WPF_Zoo_Manager
         {
             InitializeComponent();
             LoadAnimals();
+            ShowZoos();
         }
 
         private void LoadAnimals()
@@ -30,6 +34,25 @@ namespace WPF_Zoo_Manager
                 Console.WriteLine("Animals loaded from database:");
                 MessageBox.Show($"Loaded {animals.Count} animals from the database.", "Zoo Manager", MessageBoxButton.OK, MessageBoxImage.Information);
                 // Bind 'animals' to your UI, e.g., DataGrid
+            }
+        }
+
+        private void ShowZoos()
+        {
+            string query = "SELECT * FROM Zoo";
+            string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, connectionString);
+
+
+            using (sqlDataAdapter)
+            {
+                DataTable zooTable = new DataTable();
+
+                sqlDataAdapter.Fill(zooTable);
+
+                listZoos.DisplayMemberPath = "Location";
+                listZoos.SelectedValuePath = "Id";
+                listZoos.ItemsSource = zooTable.DefaultView;
             }
         }
     }
