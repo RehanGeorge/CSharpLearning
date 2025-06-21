@@ -8,7 +8,9 @@
         Title="MainWindow" Height="500" Width="725">
     <Grid>
         <Label Content="Zoo List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="listZoos" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,41,552,282"/>
+        <ListBox Name="listZoos" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,41,552,282" SelectionChanged="listZoos_SelectionChanged"/>
+        <Label Content="Associated Animals List" HorizontalAlignment="Left" Margin="176,10,0,0" VerticalAlignment="Top" Width="171"/>
+        <ListBox x:Name="listAssociatedAnimals" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="176,41,0,282" Width="171"/>
 
     </Grid>
 </Window>

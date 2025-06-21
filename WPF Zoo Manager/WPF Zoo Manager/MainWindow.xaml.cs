@@ -62,5 +62,40 @@ namespace WPF_Zoo_Manager
                 MessageBox.Show(e.ToString());
             }
         }
+
+        private void ShowAssociatedAnimals()
+        {
+            try
+            {
+                string query = "SELECT * FROM Animals a INNER JOIN ZooAnimal za ON a.Id = za.AnimalId WHERE za.ZooId = @ZooId";
+
+                string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
+                    
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                    
+                    DataTable animalTable = new DataTable();
+
+                    sqlDataAdapter.Fill(animalTable);
+
+                    listAssociatedAnimals.DisplayMemberPath = "Name";
+                    listAssociatedAnimals.SelectedValuePath = "Id";
+                    listAssociatedAnimals.ItemsSource = animalTable.DefaultView;
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        private void listZoos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowAssociatedAnimals();
+        }
     }
 }
