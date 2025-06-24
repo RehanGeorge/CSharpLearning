@@ -126,11 +126,23 @@ namespace WPF_Zoo_Manager
             string query = "DELETE FROM Zoo WHERE id = @ZooId";
             string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
-            sqlCommand.ExecuteScalar();
-            sqlConnection.Close();
+            
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowZoos();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
