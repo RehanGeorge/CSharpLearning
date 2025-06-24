@@ -24,6 +24,7 @@ namespace WPF_Zoo_Manager
             InitializeComponent();
             LoadAnimals();
             ShowZoos();
+            ShowAllAnimals();
         }
 
         private void LoadAnimals()
@@ -37,6 +38,28 @@ namespace WPF_Zoo_Manager
             }
         }
 
+        private void ShowAllAnimals()
+        {
+            try
+            {
+                string query = "select * from Animals";
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable animalTable = new DataTable();
+                    sqlDataAdapter.Fill(animalTable);
+
+                    listAllAnimals.DisplayMemberPath = "Name";
+                    listAllAnimals.SelectedValuePath = "Id";
+                    listAllAnimals.ItemsSource = animalTable.DefaultView;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private void ShowZoos()
         {
             try
@@ -96,6 +119,11 @@ namespace WPF_Zoo_Manager
         private void listZoos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowAssociatedAnimals();
+        }
+
+        private void DeleteZoo_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
