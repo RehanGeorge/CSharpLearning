@@ -194,5 +194,28 @@ namespace WPF_Zoo_Manager
             }
         }
 
+        private void DeleteAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "DELETE FROM Animal WHERE id = @AnimalId";
+            string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAllAnimals.SelectedValue);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowZoos();
+            }
+        }
+
     }
 }
