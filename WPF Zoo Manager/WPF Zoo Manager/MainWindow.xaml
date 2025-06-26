@@ -23,6 +23,7 @@
         <Button Content="Update Zoo" HorizontalAlignment="Left" Margin="1,292,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
         <Button Content="Update Animal" HorizontalAlignment="Left" Margin="165,292,0,0" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
         <TextBox Name="myTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="1,237,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="335" Height="25"/>
+        <Button Content="Add Animal to Zoo" HorizontalAlignment="Left" Margin="416,13,0,0" VerticalAlignment="Top" Width="135" Grid.Column="1" Click="addAnimalToZoo_Click"/>
 
     </Grid>
 </Window>
