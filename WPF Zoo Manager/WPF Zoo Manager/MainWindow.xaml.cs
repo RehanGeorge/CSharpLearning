@@ -33,7 +33,6 @@ namespace WPF_Zoo_Manager
             {
                 var animals = context.Animals.ToList();
                 Console.WriteLine("Animals loaded from database:");
-                MessageBox.Show($"Loaded {animals.Count} animals from the database.", "Zoo Manager", MessageBoxButton.OK, MessageBoxImage.Information);
                 // Bind 'animals' to your UI, e.g., DataGrid
             }
         }
@@ -42,7 +41,7 @@ namespace WPF_Zoo_Manager
         {
             try
             {
-                string query = "select * from Animals";
+                string query = "select * from Animal";
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString);
 
                 using (sqlDataAdapter)
@@ -90,7 +89,7 @@ namespace WPF_Zoo_Manager
         {
             try
             {
-                string query = "SELECT * FROM Animals a INNER JOIN ZooAnimal za ON a.Id = za.AnimalId WHERE za.ZooId = @ZooId";
+                string query = "SELECT * FROM Animal a INNER JOIN ZooAnimal za ON a.Id = za.AnimalId WHERE za.ZooId = @ZooId";
 
                 string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -213,9 +212,32 @@ namespace WPF_Zoo_Manager
             finally
             {
                 sqlConnection.Close();
-                ShowZoos();
+                ShowAllAnimals();
             }
         }
 
+        private void AddAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "INSERT INTO Animal values (@Name)";
+            string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@Name", myTextBox.Text);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAllAnimals();
+            }
+        }
     }
 }
