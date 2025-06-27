@@ -118,6 +118,7 @@ namespace WPF_Zoo_Manager
         private void listZoos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowAssociatedAnimals();
+            ShowSelectedZooInTextBox();
         }
 
         private void DeleteZoo_Click(object sender, RoutedEventArgs e)
@@ -213,6 +214,34 @@ namespace WPF_Zoo_Manager
             {
                 sqlConnection.Close();
                 ShowAllAnimals();
+            }
+        }
+
+        private void ShowSelectedZooInTextBox()
+        {
+            try
+            {
+                string query = "SELECT location FROM Zoo WHERE Id = @ZooId";
+
+                string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
+
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                    DataTable zooDataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(zooDataTable);
+
+                    myTextBox.Text = zooDataTable.Rows[0]["Location"].ToString();
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
         }
 
