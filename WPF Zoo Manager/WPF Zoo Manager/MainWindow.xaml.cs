@@ -96,9 +96,9 @@ namespace WPF_Zoo_Manager
                 {
                     SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
-                    
+
                     SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                    
+
                     DataTable animalTable = new DataTable();
 
                     sqlDataAdapter.Fill(animalTable);
@@ -121,12 +121,17 @@ namespace WPF_Zoo_Manager
             ShowSelectedZooInTextBox();
         }
 
+        private void listAnimals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowSelectedAnimalInTextBox();
+        }
+
         private void DeleteZoo_Click(object sender, RoutedEventArgs e)
         {
             string query = "DELETE FROM Zoo WHERE id = @ZooId";
             string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(connectionString);
-            
+
             try
             {
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
@@ -245,6 +250,28 @@ namespace WPF_Zoo_Manager
             }
         }
 
+        private void ShowSelectedAnimalInTextBox()
+        {
+            try
+            {
+                string query = "SELECT Name FROM Animal WHERE Id = @AnimalId";
+                string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@AnimalId", listAllAnimals.SelectedValue);
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                    DataTable animalDataTable = new DataTable();
+                    sqlDataAdapter.Fill(animalDataTable);
+                    myTextBox.Text = animalDataTable.Rows[0]["Name"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
         private void AddAnimal_Click(object sender, RoutedEventArgs e)
         {
             string query = "INSERT INTO Animal values (@Name)";
@@ -255,6 +282,56 @@ namespace WPF_Zoo_Manager
             {
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@Name", myTextBox.Text);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAllAnimals();
+            }
+        }
+
+        private void updateZoo_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "UPDATE Zoo SET Location = @Location WHERE Id = @ZooId";
+            string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
+                sqlCommand.Parameters.AddWithValue("@Location", myTextBox.Text);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowZoos();
+            }
+        }
+
+        private void UpdateAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "UPDATE Animal SET Name = @Name WHERE Id = @AnimalId";
+            string connectionString = ConfigurationManager.ConnectionStrings["ZooDbConnection"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAllAnimals.SelectedValue);
                 sqlCommand.Parameters.AddWithValue("@Name", myTextBox.Text);
                 sqlCommand.ExecuteScalar();
             }
