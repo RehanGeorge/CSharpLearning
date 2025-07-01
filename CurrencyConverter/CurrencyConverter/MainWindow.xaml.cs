@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Microsoft.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace CurrencyConverter
 {
@@ -18,35 +20,60 @@ namespace CurrencyConverter
     /// </summary>
     public partial class MainWindow : Window
     {
+        SqlConnection con = new SqlConnection();
+        SqlCommand cmd = new SqlCommand();
+        SqlDataAdapter da = new SqlDataAdapter();
+
+        private int CurrencyId = 0; // Variable to hold the CurrencyId
+        private double FromAmount = 0; // Variable to hold the FromAmount
+        private double ToAmount = 0; // Variable to hold the ToAmount
+
         public MainWindow()
         {
             InitializeComponent();
             BindCurrency();
         }
 
+        public void mycon()
+        {
+            String Conn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            con = new SqlConnection(Conn);
+            con.Open();
+        }
+
         private void BindCurrency()
         {
-            DataTable dtCurrency = new DataTable();
-            dtCurrency.Columns.Add("Text");
-            dtCurrency.Columns.Add("Value");
+            mycon();
+            DataTable dt = new DataTable();
+            cmd = new SqlCommand("SELECT Id, CurrencyName from Currency_Master", con);
+            cmd.CommandType = CommandType.Text;
 
-            //Add rows in the Datatable with text and value
-            dtCurrency.Rows.Add("--SELECT--", 0);
-            dtCurrency.Rows.Add("INR", 1);
-            dtCurrency.Rows.Add("USD", 75);
-            dtCurrency.Rows.Add("EUR", 85);
-            dtCurrency.Rows.Add("SAR", 20);
-            dtCurrency.Rows.Add("POUND", 5);
-            dtCurrency.Rows.Add("DEM", 43);
+            da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
 
-            cmbFromCurrency.ItemsSource = dtCurrency.DefaultView;
-            cmbFromCurrency.DisplayMemberPath = "Text";
-            cmbFromCurrency.SelectedValuePath = "Value";
+            // Add a new row for the default selection
+            DataRow newRow = dt.NewRow();
+            newRow["id"] = 0;
+            newRow["CurrencyName"] = "Select Currency";
+
+            // Insert the new row at the beginning of the DataTable
+            dt.Rows.InsertAt(newRow, 0);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                cmbFromCurrency.ItemsSource = dt.DefaultView;
+                cmbToCurrency.ItemsSource = dt.DefaultView;
+            }
+            con.Close();
+
+            
+            cmbFromCurrency.DisplayMemberPath = "CurrencyName";
+            cmbFromCurrency.SelectedValuePath = "Id";
             cmbFromCurrency.SelectedIndex = 0;
 
-            cmbToCurrency.ItemsSource = dtCurrency.DefaultView;
-            cmbToCurrency.DisplayMemberPath = "Text";
-            cmbToCurrency.SelectedValuePath = "Value";
+
+            cmbToCurrency.DisplayMemberPath = "CurrencyName";
+            cmbToCurrency.SelectedValuePath = "Id";
             cmbToCurrency.SelectedIndex = 0;
         }
 
