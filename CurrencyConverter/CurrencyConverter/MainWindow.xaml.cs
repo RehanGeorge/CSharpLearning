@@ -32,6 +32,7 @@ namespace CurrencyConverter
         {
             InitializeComponent();
             BindCurrency();
+            ClearMaster();
         }
 
         public void mycon()
@@ -192,8 +193,67 @@ namespace CurrencyConverter
                             MessageBox.Show("Currency updated successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
+                    else
+                    {
+                        if (MessageBox.Show("Are you sure you want to save this currency?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            mycon();
+                            cmd = new SqlCommand("INSERT INTO Currency_Master (Amount, CurrencyName) VALUES (@Amount, @CurrencyName)", con);
+                            cmd.Parameters.AddWithValue("@Amount", txtAmount.Text);
+                            cmd.Parameters.AddWithValue("@CurrencyName", txtCurrencyName.Text.Trim());
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Currency saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        ClearMaster();
+                    }
                 }
             } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClearMaster() // his method clears the master data fields
+        {
+            try
+            {
+                txtAmount.Text = string.Empty;
+                txtCurrencyName.Text = string.Empty;
+                btnSave.Content = "Save";
+                GetData();
+                CurrencyId = 0;
+                BindCurrency();
+                txtAmount.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void GetData()
+        {
+            try
+            {
+                mycon();
+                cmd = new SqlCommand("SELECT Id, Amount, CurrencyName FROM Currency_Master", con);
+                cmd.CommandType = CommandType.Text;
+                da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dgvCurrency.Visibility = Visibility.Visible;
+                    dgvCurrency.ItemsSource = dt.DefaultView;
+                }
+                else
+                {
+                    dgvCurrency.Visibility = Visibility.Collapsed;
+                }
+                con.Close();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

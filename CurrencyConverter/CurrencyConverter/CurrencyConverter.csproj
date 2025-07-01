@@ -9,12 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\delete-button.png" />
+    <None Remove="Images\edit-button.png" />
+    <None Remove="Images\licensableLogo.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Resource Include="Images\delete-button.png" />
+    <Resource Include="Images\edit-button.png" />
+    <Resource Include="Images\licensableLogo.jpg" />
   </ItemGroup>
 
 </Project>
