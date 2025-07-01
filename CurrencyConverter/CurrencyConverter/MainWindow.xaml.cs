@@ -32,7 +32,7 @@ namespace CurrencyConverter
         {
             InitializeComponent();
             BindCurrency();
-            ClearMaster();
+            GetData();
         }
 
         public void mycon()
@@ -67,7 +67,7 @@ namespace CurrencyConverter
             }
             con.Close();
 
-            
+
             cmbFromCurrency.DisplayMemberPath = "CurrencyName";
             cmbFromCurrency.SelectedValuePath = "Id";
             cmbFromCurrency.SelectedIndex = 0;
@@ -125,17 +125,49 @@ namespace CurrencyConverter
             }
 
             // Conversion logic
-            if (cmbFromCurrency.Text == cmbToCurrency.Text)
+            int fromId = Convert.ToInt32(cmbFromCurrency.SelectedValue);
+            int toId = Convert.ToInt32(cmbToCurrency.SelectedValue);
+
+            if (fromId == toId)
             {
                 ConvertedValue = amount;
             }
             else
             {
-                ConvertedValue = (fromValue * amount) / toValue;
+                double fromAmount = GetCurrencyAmount(fromId);
+                double toAmount = GetCurrencyAmount(toId);
+
+                if (toAmount == 0)
+                {
+                    MessageBox.Show("Invalid currency conversion rate.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                ConvertedValue = (fromAmount * amount) / toAmount;
             }
 
             // Show the result
             lblCurrency.Content = $"{cmbToCurrency.Text} {ConvertedValue:N3}";
+        }
+
+        private double GetCurrencyAmount(int currencyId)
+        {
+            double amount = 0;
+            try
+            {
+                mycon();
+                cmd = new SqlCommand("SELECT Amount FROM Currency_Master WHERE Id = @Id", con);
+                cmd.Parameters.AddWithValue("@Id", currencyId);
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                    amount = Convert.ToDouble(result);
+                con.Close();
+            }
+            catch
+            {
+                amount = 0;
+            }
+            return amount;
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
@@ -208,7 +240,8 @@ namespace CurrencyConverter
                         ClearMaster();
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -261,7 +294,14 @@ namespace CurrencyConverter
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                ClearMaster();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void dgvCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -271,7 +311,48 @@ namespace CurrencyConverter
 
         private void dgvCurrency_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
+            try
+            {
+                DataGrid grd = (DataGrid)sender;
+                DataRowView row_selected = grd.CurrentItem as DataRowView;
 
+                if (row_selected != null)
+                {
+                    if (dgvCurrency.Items.Count > 0)
+                    {
+                        if (grd.SelectedCells.Count > 0)
+                        {
+                            CurrencyId = Int32.Parse(row_selected["Id"].ToString());
+
+                            if (grd.SelectedCells[0].Column.DisplayIndex == 0)
+                            {
+                                txtAmount.Text = row_selected["Amount"].ToString();
+                                txtCurrencyName.Text = row_selected["CurrencyName"].ToString();
+                                btnSave.Content = "Update";
+                            }
+                            else if (grd.SelectedCells[0].Column.DisplayIndex == 1)
+                            {
+                                if (MessageBox.Show("Are you sure you want to delete this currency?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                                {
+                                    mycon();
+                                    cmd = new SqlCommand("DELETE FROM Currency_Master WHERE Id = @Id", con);
+                                    cmd.Parameters.AddWithValue("@Id", CurrencyId);
+                                    cmd.ExecuteNonQuery();
+                                    con.Close();
+                                    MessageBox.Show("Currency deleted successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    ClearMaster();
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
