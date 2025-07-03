@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,11 @@ namespace Linq1
             int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             OddEvenNumbers(numbers);
+            
+            UniversityManager um = new UniversityManager();
+
+            um.MaleStudents();
+            um.FemaleStudents();
 
         }
 
@@ -46,9 +52,31 @@ namespace Linq1
 
             students.Add(new Student { Id = 1, Name = "Alice", Gender = "female", Age = 20, UniversityId = 1 });
             students.Add(new Student { Id = 2, Name = "Bob", Gender = "male", Age = 20, UniversityId = 1 });
-            students.Add(new Student { Id = 3, Name = "Charlie", Gender = "male", Age = 22, UniversityId = 2 });
+            students.Add(new Student { Id = 3, Name = "Charlie", Gender = "female", Age = 22, UniversityId = 2 });
             students.Add(new Student { Id = 4, Name = "Dave", Gender = "male", Age = 21, UniversityId = 2 });
-            students.Add(new Student { Id = 5, Name = "Ennui", Gender = "female", Age = 23, UniversityId = 1 });
+            students.Add(new Student { Id = 5, Name = "Ennui", Gender = "trans-gender", Age = 23, UniversityId = 1 });
+        }
+
+        public void MaleStudents()
+        {
+            IEnumerable<Student> maleStudents = from student in students where student.Gender == "male" select student;
+            Console.WriteLine("Male - Students: ");
+
+            foreach (Student student in maleStudents)
+            {
+                student.Print();
+            }
+        }
+
+        public void FemaleStudents()
+        {
+            IEnumerable<Student> femaleStudents = from student in students where student.Gender == "female" select student;
+            Console.WriteLine("Female - Students: ");
+
+            foreach (Student student in femaleStudents)
+            {
+                student.Print();
+            }
         }
     }
     class University
