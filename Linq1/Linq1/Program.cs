@@ -14,13 +14,26 @@ namespace Linq1
             int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             OddEvenNumbers(numbers);
-            
+
             UniversityManager um = new UniversityManager();
 
             um.MaleStudents();
             um.FemaleStudents();
             um.SortStudentsByAge();
             um.AllStudentsFromBeijingTech();
+
+            int[] someInt = { 30, 12, 4, 3, 12 };
+            IEnumerable<int> sortedInts = from i in someInt orderby i select i;
+            IEnumerable<int> reversedInts = sortedInts.Reverse();
+            Console.WriteLine("Sorted Ints: " + string.Join(", ", sortedInts));
+            Console.WriteLine("Reverse Sorted Ints: " + string.Join(", ", reversedInts));
+
+            /*
+            string input = Console.ReadLine();
+            int inputAsInt = Convert.ToInt32(input);
+
+            um.SearchStudentsByUniversityId(inputAsInt);
+            */
 
         }
 
@@ -49,7 +62,7 @@ namespace Linq1
             universities = new List<University>();
             students = new List<Student>();
 
-            universities.Add(new University { Id = 1, Name = "University A" });
+            universities.Add(new University { Id = 1, Name = "Yale" });
             universities.Add(new University { Id = 2, Name = "Beijing Tech" });
 
             students.Add(new Student { Id = 1, Name = "Alice", Gender = "female", Age = 20, UniversityId = 1 });
@@ -102,6 +115,19 @@ namespace Linq1
 
             Console.WriteLine("All Students from Beijing Tech:");
             foreach (Student student in bjtStudents)
+            {
+                student.Print();
+            }
+        }
+
+        public void SearchStudentsByUniversityId(int universityId)
+        {
+            IEnumerable<Student> univStudents = from student in students
+                                                join university in universities on student.UniversityId equals university.Id
+                                                where university.Id == universityId
+                                                select student;
+            Console.WriteLine("Students from University with Id {0}:", universityId);
+            foreach (Student student in univStudents)
             {
                 student.Print();
             }
