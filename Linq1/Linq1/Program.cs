@@ -19,6 +19,8 @@ namespace Linq1
 
             um.MaleStudents();
             um.FemaleStudents();
+            um.SortStudentsByAge();
+            um.AllStudentsFromBeijingTech();
 
         }
 
@@ -48,7 +50,7 @@ namespace Linq1
             students = new List<Student>();
 
             universities.Add(new University { Id = 1, Name = "University A" });
-            universities.Add(new University { Id = 2, Name = "University B" });
+            universities.Add(new University { Id = 2, Name = "Beijing Tech" });
 
             students.Add(new Student { Id = 1, Name = "Alice", Gender = "female", Age = 20, UniversityId = 1 });
             students.Add(new Student { Id = 2, Name = "Bob", Gender = "male", Age = 20, UniversityId = 1 });
@@ -74,6 +76,32 @@ namespace Linq1
             Console.WriteLine("Female - Students: ");
 
             foreach (Student student in femaleStudents)
+            {
+                student.Print();
+            }
+        }
+
+        public void SortStudentsByAge()
+        {
+            var sortedStudents = from student in students orderby student.Age select student;
+
+            Console.WriteLine("Students sorted by Age:");
+
+            foreach (Student student in sortedStudents)
+            {
+                student.Print();
+            }
+        }
+
+        public void AllStudentsFromBeijingTech()
+        {
+            IEnumerable<Student> bjtStudents = from student in students
+                                               join university in universities on student.UniversityId equals university.Id
+                                               where university.Name == "Beijing Tech"
+                                               select student;
+
+            Console.WriteLine("All Students from Beijing Tech:");
+            foreach (Student student in bjtStudents)
             {
                 student.Print();
             }
