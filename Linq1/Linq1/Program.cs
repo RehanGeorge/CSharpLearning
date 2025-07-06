@@ -22,6 +22,8 @@ namespace Linq1
             um.SortStudentsByAge();
             um.AllStudentsFromBeijingTech();
 
+            um.StudentAndUniversityCollection();
+
             int[] someInt = { 30, 12, 4, 3, 12 };
             IEnumerable<int> sortedInts = from i in someInt orderby i select i;
             IEnumerable<int> reversedInts = sortedInts.Reverse();
@@ -132,7 +134,22 @@ namespace Linq1
                 student.Print();
             }
         }
+    public void StudentAndUniversityCollection()
+        {
+            var newCollection = from student in students
+                                join university in universities on student.UniversityId equals university.Id
+                                orderby student.Name
+                                select new { StudentName = student.Name, UniversityName = university.Name };
+
+            Console.WriteLine("New Collection: ");
+
+            foreach (var col in newCollection)
+            {
+                Console.WriteLine("Student: {0}, University: {1}", col.StudentName, col.UniversityName);
+            }
+        }
     }
+
     class University
     {
         public int Id { get; set; }
