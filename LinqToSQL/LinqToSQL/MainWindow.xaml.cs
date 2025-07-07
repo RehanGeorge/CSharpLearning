@@ -29,20 +29,46 @@ namespace LinqToSQL
             string connectionString = ConfigurationManager.ConnectionStrings["LinqToSQL.Properties.Settings.CSharpLearningDBConnectionString"].ConnectionString;
             dataContext = new LinqToSqlDataClassesDataContext(connectionString);
 
-            InsertUniversities();
+            //InsertUniversities();
+            InsertStudents();
         }
 
         public void InsertUniversities()
         {
+            dataContext.ExecuteCommand("delete from University");
+
             University yale = new University
             {
                 Name = "Yale"
             };
             dataContext.Universities.InsertOnSubmit(yale);
 
+            University harvard = new University();
+            harvard.Name = "Harvard";
+
+            dataContext.Universities.InsertOnSubmit(harvard);
+
             dataContext.SubmitChanges();
 
             MainDataGrid.ItemsSource = dataContext.Universities.ToList();
+        }
+
+        public void InsertStudents()
+        {
+            University yale = dataContext.Universities.First(un => un.Name.Equals("Yale"));
+            University harvard = dataContext.Universities.First(un => un.Name.Equals("Harvard"));
+
+            List<Student> students = new List<Student>();
+
+            students.Add(new Student { Name = "John Doe", Gender = "Male", UniversityId = yale.Id });
+            students.Add(new Student { Name = "Jane Smith", Gender = "Female", University = harvard });
+            students.Add(new Student { Name = "Alice Johnson", Gender = "Female", UniversityId = yale.Id });
+            students.Add(new Student { Name = "Bob Brown", Gender = "Male", UniversityId = harvard.Id });
+
+            dataContext.Students.InsertAllOnSubmit(students);
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Students;
         }
     }
 }

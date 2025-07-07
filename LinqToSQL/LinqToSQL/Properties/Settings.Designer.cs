@@ -26,11 +26,22 @@ namespace LinqToSQL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=M16\\SQLEXPRESS;Initial Catalog=CSharpLearningDB;Persist Security Info" +
-            "=True;User ID=sa;Pooling=False;Encrypt=True;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=M16\\SQLEXPRESS;Initial Catalog=CSharpLearningDB;Integrated Security=T" +
+            "rue;TrustServerCertificate=True")]
         public string CSharpLearningDBConnectionString {
             get {
                 return ((string)(this["CSharpLearningDBConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=M16\\SQLEXPRESS;Initial Catalog=CSharpLearningDB;Persist Security Info" +
+            "=True;User ID=sa;Pooling=False;Encrypt=True;TrustServerCertificate=True")]
+        public string CSharpLearningDBConnectionString1 {
+            get {
+                return ((string)(this["CSharpLearningDBConnectionString1"]));
             }
         }
     }
