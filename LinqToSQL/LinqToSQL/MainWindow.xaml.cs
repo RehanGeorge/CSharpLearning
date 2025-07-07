@@ -26,8 +26,23 @@ namespace LinqToSQL
         {
             InitializeComponent();
 
-            string connectionString = ConfigurationManager.ConnectionStrings["LinqToSQL.Properties.Settings.LINQToSQLConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["LinqToSQL.Properties.Settings.CSharpLearningDBConnectionString"].ConnectionString;
             dataContext = new LinqToSqlDataClassesDataContext(connectionString);
+
+            InsertUniversities();
+        }
+
+        public void InsertUniversities()
+        {
+            University yale = new University
+            {
+                Name = "Yale"
+            };
+            dataContext.Universities.InsertOnSubmit(yale);
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Universities.ToList();
         }
     }
 }
