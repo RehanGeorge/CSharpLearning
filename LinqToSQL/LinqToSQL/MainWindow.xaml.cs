@@ -37,7 +37,7 @@ namespace LinqToSQL
             //GetLecturesFromStudent("John Doe");
             //GetAllStudentsFromYale();
             //GetAllLecturesFromHarvard();
-            UpdateStudentName("John Doe", "Johnathan Doe");
+            //UpdateStudentName("John Doe", "Johnathan Doe");
         }
 
         public void InsertUniversities()
@@ -168,6 +168,21 @@ namespace LinqToSQL
                 MessageBox.Show("Student not found.");
             }
 
+            MainDataGrid.ItemsSource = dataContext.Students;
+        }
+
+        public void DeleteStudent(string studentName)
+        {
+            Student student = dataContext.Students.FirstOrDefault(s => s.Name.Equals(studentName));
+            if (student != null)
+            {
+                dataContext.Students.DeleteOnSubmit(student);
+                dataContext.SubmitChanges();
+            }
+            else
+            {
+                MessageBox.Show("Student not found.");
+            }
             MainDataGrid.ItemsSource = dataContext.Students;
         }
     }
