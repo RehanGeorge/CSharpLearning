@@ -44,5 +44,16 @@ namespace LinqToSQL.Properties {
                 return ((string)(this["CSharpLearningDBConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=M16\\SQLEXPRESS;Initial Catalog=CSharpLearningDB;Persist Security Info" +
+            "=True;User ID=sa;Pooling=False;Encrypt=True;TrustServerCertificate=True")]
+        public string CSharpLearningDBConnectionString2 {
+            get {
+                return ((string)(this["CSharpLearningDBConnectionString2"]));
+            }
+        }
     }
 }
