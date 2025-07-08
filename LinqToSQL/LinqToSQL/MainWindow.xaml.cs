@@ -31,7 +31,8 @@ namespace LinqToSQL
 
             //InsertUniversities();
             //InsertStudents();
-            InsertLectures();
+            //InsertLectures();
+            //InsertStudentLectureAssociations();
         }
 
         public void InsertUniversities()
@@ -80,6 +81,26 @@ namespace LinqToSQL
             dataContext.SubmitChanges();
 
             MainDataGrid.ItemsSource = dataContext.Lectures;
+        }
+
+        public void InsertStudentLectureAssociations()
+        {
+            Student jd = dataContext.Students.First(s => s.Name.Equals("John Doe"));
+            Student js = dataContext.Students.First(s => s.Name.Equals("Jane Smith"));
+            Student aj = dataContext.Students.First(s => s.Name.Equals("Alice Johnson"));
+            Student bb = dataContext.Students.First(s => s.Name.Equals("Bob Brown"));
+
+            Lecture math = dataContext.Lectures.First(l => l.Name.Equals("Math"));
+            Lecture physics = dataContext.Lectures.First(l => l.Name.Equals("Physics"));
+
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture { Student = jd, Lecture = math });
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture { Student = js, Lecture = physics });
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture { Student = aj, Lecture = math });
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture { Student = bb, Lecture = physics });
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.StudentLectures.ToList();
         }
     }
 }
