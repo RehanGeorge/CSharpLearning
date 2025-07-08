@@ -34,7 +34,10 @@ namespace LinqToSQL
             //InsertLectures();
             //InsertStudentLectureAssociations();
             //GetUniversityOfStudent("Jane Smith");
-            GetLecturesFromStudent("John Doe");
+            //GetLecturesFromStudent("John Doe");
+            //GetAllStudentsFromYale();
+            //GetAllLecturesFromHarvard();
+            UpdateStudentName("John Doe", "Johnathan Doe");
         }
 
         public void InsertUniversities()
@@ -131,6 +134,41 @@ namespace LinqToSQL
             {
                 MessageBox.Show("Student not found.");
             }
+        }
+
+        public void GetAllStudentsFromYale()
+        {
+            var studentsFromYale = from s in dataContext.Students
+                                   where s.University.Name == "Yale"
+                                   select s;
+
+            MainDataGrid.ItemsSource = studentsFromYale.ToList();
+        }
+
+        public void GetAllLecturesFromHarvard()
+        {
+            var lecturesFromHarvard = from sl in dataContext.StudentLectures
+                                      join s in dataContext.Students on sl.StudentId equals s.Id
+                                      where s.University.Name == "Harvard"
+                                      select sl.Lecture;
+            List<Lecture> uniqueLectures = lecturesFromHarvard.Distinct().ToList();
+            MainDataGrid.ItemsSource = uniqueLectures;
+        }
+
+        public void UpdateStudentName(string currentName, string newName)
+        {
+            Student student = dataContext.Students.FirstOrDefault(s => s.Name.Equals(currentName));
+            if (student != null)
+            {
+                student.Name = newName;
+                dataContext.SubmitChanges();
+            }
+            else
+            {
+                MessageBox.Show("Student not found.");
+            }
+
+            MainDataGrid.ItemsSource = dataContext.Students;
         }
     }
 }
