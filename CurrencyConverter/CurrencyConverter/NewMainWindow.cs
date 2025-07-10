@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
+// https://tutorials.eu/build-a-currency-converter-application-using-wpf-in-c-with-api/
+
 namespace CurrencyConverter_API
 {
     public partial class MainWindow : Window
