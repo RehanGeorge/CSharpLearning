@@ -18,6 +18,13 @@
 
             MultiBox<int, string> multiBox = new MultiBox<int, string>(1, "One");
             multiBox.Display();
+
+            Logger logger = new Logger();
+
+            logger.Log<int>(10);
+            logger.Log<string>("Hello World");
+
+            logger.Log(new {Name = "John", Age = 30});
         }
     }
 }
