@@ -25,6 +25,15 @@
             logger.Log<string>("Hello World");
 
             logger.Log(new {Name = "John", Age = 30});
+
+            Repository<Product> repository = new Repository<Product>();
+            var product = new Product();
+            repository.Add(product);
         }
+    }
+
+    class Product : IEntity
+    {
+        public int Id { get; set; }
     }
 }
