@@ -15,6 +15,9 @@
             NewBox<double> doubleBox = new NewBox<double>(3.14);
             doubleBox.UpdateContent(2.71);
             Console.WriteLine(doubleBox.Value);
+
+            MultiBox<int, string> multiBox = new MultiBox<int, string>(1, "One");
+            multiBox.Display();
         }
     }
 }
