@@ -29,6 +29,9 @@
             Repository<Product> repository = new Repository<Product>();
             var product = new Product();
             repository.Add(product);
+
+            var product2 = new Product();
+            Console.WriteLine(Comparer.AreEqual(product, product2));
         }
     }
 
