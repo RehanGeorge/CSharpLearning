@@ -8,7 +8,7 @@ namespace Generics
 {
     internal interface IEntity
     {
-        int Id { get;  }
+        int Id { get; }
     }
     internal class Repository<T> where T : IEntity
     {
@@ -17,6 +17,25 @@ namespace Generics
         public void Add(T entity)
         {
             values.Add(entity);
+        }
+    }
+
+    internal interface IRepository<T>
+    {
+        void Add(T entity);
+        void Remove(T entity);
+    }
+
+    internal class ProductRepository : IRepository<Product>
+    {
+        public void Add(Product entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Product entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
