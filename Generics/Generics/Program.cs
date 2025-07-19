@@ -55,6 +55,20 @@ namespace Generics
             };
 
             sum(1.5f, 2.5f, 3.5f);
+
+            Func<string> getName = () =>
+            {
+               return "Rehan";
+            };
+
+            Console.WriteLine(getName());
+
+            Func<int, int, int> sumTwo = (x, y) =>
+            {
+                return x + y;
+            };
+
+            Console.WriteLine(sumTwo(5, 10));
         }
     }
 
