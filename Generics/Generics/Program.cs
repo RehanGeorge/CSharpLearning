@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace Generics
 {
@@ -80,6 +81,20 @@ namespace Generics
             List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             var evenInts = numbers.FindAll(isEven);
+
+            // Task Management
+            TaskManagement.EmailTask emailTask = new TaskManagement.EmailTask();
+            emailTask.Recipient = "user@example.com";
+            emailTask.Message = "Hello, this is a test email.";
+
+            TaskManagement.ReportTask reportTask = new TaskManagement.ReportTask();
+            reportTask.ReportName = "Monthly Sales Report";
+
+            TaskManagement.TaskProcessor<TaskManagement.EmailTask, string> emailTaskProcessor = new TaskManagement.TaskProcessor<TaskManagement.EmailTask, string>(emailTask);
+            TaskManagement.TaskProcessor<TaskManagement.ReportTask, string> reportTaskProcessor = new TaskManagement.TaskProcessor<TaskManagement.ReportTask, string>(reportTask);
+            Console.WriteLine(emailTaskProcessor.Execute());
+            Console.WriteLine(reportTaskProcessor.Execute());
+
         }
     }
 
