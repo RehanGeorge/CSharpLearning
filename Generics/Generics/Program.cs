@@ -69,6 +69,17 @@ namespace Generics
             };
 
             Console.WriteLine(sumTwo(5, 10));
+
+            Predicate<int> isEven = x =>
+            {
+                return x % 2 == 0;
+            };
+
+            Console.WriteLine(isEven(4) ? "Even" : "Odd");
+
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            var evenInts = numbers.FindAll(isEven);
         }
     }
 
