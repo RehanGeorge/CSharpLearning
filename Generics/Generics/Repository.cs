@@ -10,7 +10,7 @@ namespace Generics
     {
         int Id { get; }
     }
-    internal class Repository<T> where T : IEntity
+    internal class Repository<T> : IRepository<T>
     {
         private List<T> values = new List<T>();
 
@@ -18,9 +18,14 @@ namespace Generics
         {
             values.Add(entity);
         }
+
+        public void Remove(T entity)
+        {
+            values.Remove(entity);
+        }
     }
 
-    internal interface IRepository<T> where T: IEntity
+    internal interface IRepository<T>
     {
         void Add(T entity);
         void Remove(T entity);

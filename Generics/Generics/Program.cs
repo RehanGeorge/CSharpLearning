@@ -1,4 +1,6 @@
-﻿namespace Generics
+﻿using System.Reflection;
+
+namespace Generics
 {
     internal class Program
     {
@@ -32,6 +34,27 @@
 
             var product2 = new Product();
             Console.WriteLine(Comparer.AreEqual(product, product2));
+
+            Type type = typeof(Product);
+
+            Action action = () => Console.WriteLine("Action executed");
+            MethodInfo methodInfo = action.GetMethodInfo();
+            action.Invoke();
+            action();
+
+            Action<int> numPrint = x =>
+            {
+                Console.WriteLine(x);
+            };
+
+            numPrint(5);
+
+            Action<float,float,float> sum = (x, y, z) =>
+            {
+                Console.WriteLine(x + y + z);
+            };
+
+            sum(1.5f, 2.5f, 3.5f);
         }
     }
 
