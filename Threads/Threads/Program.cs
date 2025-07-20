@@ -13,7 +13,7 @@ namespace Threads
             thread1.Start();
             thread2.Start();
 
-            if(thread1.Join(1000))
+            if (thread1.Join(1000))
             {
                 Console.WriteLine("Thread1Function done");
             }
@@ -24,6 +24,21 @@ namespace Threads
 
             thread2.Join();
             Console.WriteLine("Thread2Function done");
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (thread1.IsAlive)
+                {
+                    Console.WriteLine("Thread1 is still alive");
+                    Thread.Sleep(300); // Wait for 300 milliseconds
+                }
+                else
+                {
+                    Console.WriteLine("Thread1 completed");
+                    break;
+                }
+
+            }
 
             Console.WriteLine("Main Thread ended");
 
