@@ -44,7 +44,21 @@ namespace WPFTasksE
 
                 MessageBox.Show("Web request completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             });
+        }
 
+        private async void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} before awaiting Task");
+            await Task.Run(async () =>
+            {
+                Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} during await Task");
+                HttpClient webClient = new HttpClient();
+                string html = await webClient.GetStringAsync("https://google.com");
+
+                Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} after awaiting Task");
+                MessageBox.Show("Web request completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            });
+            MyButton.Content = "Done";
         }
     }
 }
