@@ -6,74 +6,15 @@ namespace Threads
     {
         static void Main(string[] args)
         {
-            /*
-            Console.WriteLine("Hello World! 1");
-            Thread.Sleep(1000);
-            Console.WriteLine("Hello World! 2");
-            Thread.Sleep(1000);
-            Console.WriteLine("Hello World! 3");
-            Thread.Sleep(1000);
-            */
-
-            /*
-            new Thread(() =>
+            Enumerable.Range(0, 1000).ToList().ForEach(f =>
             {
-                Thread.Sleep(1000);
-                Console.WriteLine("Thread 1");
-            }).Start();
-
-            new Thread(() =>
-            {
-                Thread.Sleep(1000);
-                Console.WriteLine("Thread 2");
-            }).Start();
-
-            new Thread(() =>
-            {
-                Thread.Sleep(1000);
-                Console.WriteLine("Thread 3");
-            }).Start();
-            */
-
-            var taskCompletionSource = new TaskCompletionSource<bool>();
-
-            var thread = new Thread(() =>
-            {
-                taskCompletionSource.TrySetResult(true);
-            });
-            Console.WriteLine($"Thread number: {thread.ManagedThreadId}");
-            thread.Start();
-            var test = taskCompletionSource.Task.Result;
-
-            int[] numbersArray = new int[100];
-            for (int i = 0; i < numbersArray.Length; i++)
-            {
-                numbersArray[i] = i;
-            }
-
-            var evenCalcThread = new Thread(() =>
-            {
-                for (int i = 0; i < numbersArray.Length; i++)
+                new Thread(() =>
                 {
-                    if (i % 2 == 0)
-                    {
-                        Console.WriteLine($"Thread 2: {numbersArray[i]}");
-                    }
-                }
+                    Console.WriteLine($"Thread number: {Thread.CurrentThread.ManagedThreadId} started");
+                    Thread.Sleep(1000); // Simulate some work
+                    Console.WriteLine($"Thread number: {Thread.CurrentThread.ManagedThreadId} finished");
+                }).Start();
             });
-            evenCalcThread.Start();
-
-            var oddCalcThread = new Thread(() =>
-            {
-                for (int i = 0; i < numbersArray.Length; i++)
-                {
-                    if (i % 2 != 0)
-                    {
-                        Console.WriteLine($"Thread 3: {numbersArray[i]}");
-                    }
-                }
-            });
-            oddCalcThread.Start();
         }
     }
 }
