@@ -30,11 +30,21 @@ namespace WPFTasksE
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} is running");
-            HttpClient webClient = new HttpClient();
-            string html = webClient.GetStringAsync("https://google.com").Result;
-            MyButton.Content = "Done";
-            MessageBox.Show("Web request completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            Task.Run(() =>
+            {
+                Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} is running");
+                HttpClient webClient = new HttpClient();
+                string html = webClient.GetStringAsync("https://google.com").Result;
+
+                MyButton.Dispatcher.Invoke(() =>
+                {
+                    Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} owns MyButton");
+                    MyButton.Content = "Done";
+                });
+
+                MessageBox.Show("Web request completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            });
+
         }
     }
 }
