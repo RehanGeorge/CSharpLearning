@@ -23,6 +23,14 @@ namespace WPFTasksE
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public static readonly DependencyProperty HtmlProperty = DependencyProperty.RegisterAttached(
+            "Html",
+            typeof(string),
+            typeof(MainWindow),
+            new FrameworkPropertyMetadata(OnHtmlChanged));
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -48,17 +56,29 @@ namespace WPFTasksE
 
         private async void Button_Click2(object sender, RoutedEventArgs e)
         {
+            string myHtml = "x";
             Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} before awaiting Task");
             await Task.Run(async () =>
             {
                 Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} during await Task");
                 HttpClient webClient = new HttpClient();
                 string html = await webClient.GetStringAsync("https://google.com");
-
-                Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} after awaiting Task");
-                MessageBox.Show("Web request completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                myHtml = html;
             });
+            Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} after awaiting Task");
+            MessageBox.Show("Web request completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             MyButton.Content = "Done";
+            MyWebBrowser.SetValue(HtmlProperty, myHtml);
+        }
+
+        static void OnHtmlChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            Debug.WriteLine($"Thread Nr. {Thread.CurrentThread.ManagedThreadId} is running OnHtmlChanged");
+            WebBrowser webBrowser = dependencyObject as WebBrowser;
+            if (webBrowser != null )
+            {
+                webBrowser.NavigateToString(e.NewValue as string);
+            }
         }
     }
 }
