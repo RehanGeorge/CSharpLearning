@@ -1,4 +1,5 @@
 using Domain;
+using FluentAssertions;
 
 namespace CalculatorTest
 {
@@ -9,10 +10,8 @@ namespace CalculatorTest
         {
             var calculator = new Calculator();
             var result = calculator.Sum(2, 6);
-            if (result != 8)
-            {
-                throw new Exception($"The Sum(2,2) was expected to be 4 but it's {result}");
-            }
+
+            result.Should().Be(8);
         }
     }
 }
