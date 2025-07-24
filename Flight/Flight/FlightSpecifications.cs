@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Xunit;
-using Domain.Tests;
+using Domain;
 
 namespace FlightTest
 {
