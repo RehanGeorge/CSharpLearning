@@ -10,7 +10,7 @@ public class Flight
         RemainingNumberOfSeats = seatCapacity;
     }
 
-    public void Book(string v1, int numberOfSeats)
+    public void Book(string passengerEmail, int numberOfSeats)
     {
         RemainingNumberOfSeats -= numberOfSeats;
     }
