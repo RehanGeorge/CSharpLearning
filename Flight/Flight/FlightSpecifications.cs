@@ -6,28 +6,15 @@ namespace FlightTest
 {
     public class FlightSpecifications
     {
-        [Fact]
-        public void Booking_reduces_the_number_of_seats_by_the_number_of_seats_booked()
+        [Theory]
+        [InlineData(3,1,2)]
+        [InlineData(5,3,2)]
+        [InlineData(50,24,26)]
+        public void Booking_reduces_the_number_of_seats_by_the_number_of_seats_booked(int seatCapacity, int seatsBooked, int expectedRemainingSeats)
         {
-            var flight = new Flight(seatCapacity: 3);
-            flight.Book("rehan", 2);
-            flight.RemainingNumberOfSeats.Should().Be(1);
-        }
-
-        [Fact]
-        public void Booking_reduces_the_number_of_seats_by_the_number_of_seats_booked_2()
-        {
-            var flight = new Flight(seatCapacity: 5);
-            flight.Book("rehan", 3);
-            flight.RemainingNumberOfSeats.Should().Be(2);
-        }
-
-        [Fact]
-        public void Booking_reduces_the_number_of_seats_by_the_number_of_seats_booked_3()
-        {
-            var flight = new Flight(seatCapacity: 50);
-            flight.Book("rehan", 24);
-            flight.RemainingNumberOfSeats.Should().Be(26);
+            var flight = new Flight(seatCapacity);
+            flight.Book("rehan", seatsBooked);
+            flight.RemainingNumberOfSeats.Should().Be(expectedRemainingSeats);
         }
 
         [Fact]
