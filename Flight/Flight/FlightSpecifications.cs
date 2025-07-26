@@ -13,5 +13,18 @@ namespace FlightTest
             flight.Book("rehan", 2);
             flight.RemainingNumberOfSeats.Should().Be(1);
         }
+
+        [Fact]
+        public void Avoid_Overbooking()
+        {
+            // Given
+            var flight = new Flight(seatCapacity: 3);
+
+            // When
+            var error = flight.Book("rehan", 4);
+
+            // Then
+            error.Should().BeOfType<OverbookingError>();
+        }
     }
 }

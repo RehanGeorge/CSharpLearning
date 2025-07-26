@@ -10,8 +10,14 @@ public class Flight
         RemainingNumberOfSeats = seatCapacity;
     }
 
-    public void Book(string passengerEmail, int numberOfSeats)
+    public object? Book(string passengerEmail, int numberOfSeats)
     {
+        if (numberOfSeats > RemainingNumberOfSeats)
+        {
+            return new OverbookingError();
+        }
+
         RemainingNumberOfSeats -= numberOfSeats;
+        return null;
     }
 }
