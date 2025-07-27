@@ -1,4 +1,5 @@
-﻿namespace Domain;
+﻿
+namespace Domain;
 
 public class Flight
 {
@@ -22,5 +23,14 @@ public class Flight
         RemainingNumberOfSeats -= numberOfSeats;
         bookingList.Add(new Booking(passengerEmail, numberOfSeats));
         return null;
+    }
+
+    public void CancelBooking(string passengerEmail, int numberOfSeats)
+    {
+        var booking = bookingList.FirstOrDefault(b => b.Email == passengerEmail);
+        if (booking != null)
+        {
+            RemainingNumberOfSeats += numberOfSeats;
+        }
     }
 }
