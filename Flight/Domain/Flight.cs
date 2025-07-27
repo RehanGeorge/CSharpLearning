@@ -25,12 +25,19 @@ public class Flight
         return null;
     }
 
-    public void CancelBooking(string passengerEmail, int numberOfSeats)
+    public object? CancelBooking(string passengerEmail, int numberOfSeats)
     {
-        var booking = bookingList.FirstOrDefault(b => b.Email == passengerEmail);
-        if (booking != null)
+        if (!bookingList.Any(booking => booking.Email == passengerEmail))
         {
-            RemainingNumberOfSeats += numberOfSeats;
+            return new BookingNotFoundError();
         }
+
+        var booking = bookingList.FirstOrDefault(b => b.Email == passengerEmail)!;
+        if (booking.NumberOfSeats < numberOfSeats)
+        {
+            return new TooManySeatsError();
+        }
+        RemainingNumberOfSeats += numberOfSeats;
+        return null;
     }
 }
