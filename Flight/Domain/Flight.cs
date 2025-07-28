@@ -7,6 +7,7 @@ public class Flight
     public IEnumerable<Booking> BookingList => bookingList;
     public int SeatCapacity { get; set; }
     public int RemainingNumberOfSeats { get; set; }
+    public Guid Id { get; }
     public Flight(int seatCapacity)
     {
         SeatCapacity = seatCapacity;
