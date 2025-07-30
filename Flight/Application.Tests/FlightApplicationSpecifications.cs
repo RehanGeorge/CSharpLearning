@@ -8,24 +8,55 @@ namespace Application.Tests
 {
     public class FlightApplicationSpecifications
     {
+        readonly Entities _entities = new Entities(new DbContextOptionsBuilder<Entities>()
+                .UseInMemoryDatabase("Flights")
+                .Options);
+
+        readonly BookingService _bookingService;
+
+        public FlightApplicationSpecifications()
+        {
+            _bookingService = new BookingService(entities: _entities);
+        }
+
         [Theory]
         [InlineData("M@m.com", 2)]
         [InlineData("a@a.com", 2)]
         public void Books_flights(string passengerEmail, int numberOfSeats)
         {
-            var entities = new Entities(new DbContextOptionsBuilder<Entities>()
-                .UseInMemoryDatabase("Flights")
-                .Options);
-            var flight = new Flight(3);
-            entities.Flights.Add(flight);
 
-            var bookingService = new BookingService(entities: entities);
-            bookingService.Book(new BookDto(
+            var flight = new Flight(3);
+            _entities.Flights.Add(flight);
+
+            _bookingService.Book(new BookDto(
                 flightId: flight.Id, passengerEmail, numberOfSeats));
 
-            bookingService.FindBookings(flight.Id).Should().ContainEquivalentOf(
+            _bookingService.FindBookings(flight.Id).Should().ContainEquivalentOf(
                 new BookingRm(passengerEmail, numberOfSeats)
                 );
         }
+
+        [Fact]
+        public void Cancels_booking()
+        {
+            // Given
+
+            var flight = new Flight(3);
+            _entities.Flights.Add(flight);
+
+            _bookingService.Book(new BookDto(flightId: flight.Id, passengerEmail: "m@m.com", numberOfSeats: 2));
+
+            // When
+            _bookingService.CancelBooking(
+                new CancelBookingDto(flightId: flight.Id,
+                passengerEmail: "m@m.com",
+                numberOfSeats: 2)
+                );
+
+            // Then
+            _bookingService.GetRemainingNumberOfSeatsFor(flight.Id).Should().Be(3);
+        }
     }
+
+
 }
